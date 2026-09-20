@@ -1,0 +1,189 @@
+/* Buttons, surfaces, dividers, image treatments, tags.
+   Slightly refined 2px corners everywhere — no pills except tags. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 44px; /* touch target */
+  padding: 0.95rem 1.6rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Primary — solid ember. Bone text holds ~4.8:1 on ember. */
+.btn-primary {
+  background: var(--color-ember);
+  color: var(--color-bone);
+}
+.btn-primary:hover {
+  background: var(--color-ember-deep);
+}
+.btn-primary:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Secondary — solid bone on dark */
+.btn-secondary {
+  background: var(--color-bone);
+  color: var(--color-coal);
+}
+.btn-secondary:hover {
+  background: var(--color-ember);
+  color: var(--color-coal);
+}
+.btn-secondary:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Ghost — outline, editorial */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-bone);
+  border-color: color-mix(in srgb, var(--color-mist) 25%, transparent);
+}
+.btn-ghost:hover {
+  border-color: var(--color-ember);
+  color: var(--color-ember-soft);
+}
+.btn-ghost:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Compact button */
+.btn-sm {
+  min-height: 40px;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.7rem;
+}
+
+/* Legacy Stage 1 aliases — identical behavior, keep sections working */
+.btn-ink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.95rem 1.6rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--color-bone);
+  color: var(--color-coal);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.btn-ink:hover {
+  background: var(--color-ember);
+  color: var(--color-bone);
+}
+.btn-ink:active {
+  transform: scale(0.97);
+}
+.btn-ink:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+.btn-ink:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ——— Surfaces (flat, hairline — never floating cards) ——— */
+.surface {
+  background: var(--color-seam);
+  border: 1px solid color-mix(in srgb, var(--color-mist) 12%, transparent);
+  border-radius: var(--radius);
+}
+.surface-light {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  border: 1px solid rgb(27 22 17 / 0.12);
+  border-radius: var(--radius);
+}
+
+/* ——— Hairlines + dividers ——— */
+.hairline {
+  border-color: color-mix(in srgb, var(--color-mist) 12%, transparent);
+}
+.divider {
+  height: 1px;
+  background: color-mix(in srgb, var(--color-mist) 12%, transparent);
+  border: 0;
+}
+.divider-accent {
+  height: 1px;
+  background: color-mix(in srgb, var(--color-ember) 55%, transparent);
+  border: 0;
+}
+
+/* ——— Image treatments ——— */
+.img-cinematic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.img-editorial {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+.img-product {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+.img-zoom {
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.group:hover .img-zoom {
+  transform: scale(1.04);
+}
+
+/* ——— Tags ——— */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--color-ember) 60%, transparent);
+  color: var(--color-ember-soft);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.tag-solid {
+  background: var(--color-ember);
+  border-color: transparent;
+  color: var(--color-bone);
+}

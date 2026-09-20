@@ -1,0 +1,61 @@
+@theme {
+  /* ——— STACKED color tokens ———
+     Dark cinematic surface is default. Light editorial surface via
+     [data-theme="light"] overrides below. ONE accent: burnt tomato red. */
+
+  /* Dark surfaces */
+  --color-coal: #100e0c; /* primary near-black background */
+  --color-seam: #171410; /* raised dark surface */
+  --color-abyss: #0a0908; /* deepest black (letterbox, veils) */
+
+  /* Light surfaces */
+  --color-bone: #f4f1ea; /* warm white — text on dark */
+  --color-cream: #ece4d3; /* warm off-white — light section bg */
+  --color-parchment: #f7f3ea; /* lightest editorial surface */
+  --color-ink: #1b1611; /* deep charcoal — text on light */
+
+  /* Muted text */
+  --color-fog: #a8a29a; /* muted warm gray — secondary text on dark */
+
+  /* Accent — burnt tomato red. Fills + large display. */
+  --color-ember: #be3c1e;
+  --color-ember-deep: #8e2a14;
+  /* Small text / icons on dark only (4.5:1+ on coal). */
+  --color-ember-soft: #e4652e;
+
+  /* Hairline borders that work on dark via color-mix in utilities */
+  --color-mist: #f4f1ea;
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  /* Motion */
+  --dur-fast: 120ms;
+  --dur: 220ms;
+  --dur-slow: 480ms;
+  --dur-cine: 700ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cine: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Form */
+  --radius: 2px;
+  --focus-ring: 2px solid var(--color-ember);
+
+  /* Spacing rhythm — section vertical padding */
+  --sec-y: 7rem; /* mobile: 4.5rem via media query in layout.css */
+  --sec-y-lg: 10rem;
+
+  color-scheme: dark;
+}
+
+/* Light editorial surface: re-tune tokens so the SAME utilities adapt.
+   Usage: <section data-theme="light" class="bg-cream text-ink"> */
+[data-theme="light"] {
+  --color-ember: #a83416; /* deepened for contrast on cream */
+  --color-ember-soft: #a83416;
+  --color-fog: #5c554b; /* secondary text on light */
+  color-scheme: light;
+}

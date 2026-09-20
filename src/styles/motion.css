@@ -1,0 +1,62 @@
+/* Motion foundation. One-shot reveals + hover micro-interactions only.
+   Infinite decorative animations and expensive filter transitions removed
+   for low-end GPU support (Intel HD 4400). Hero frame work comes in
+   Stage 4. */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.motion-rise {
+  animation: rise-in var(--dur-slow) var(--ease-out) both;
+}
+.motion-fade {
+  animation: fade-in var(--dur) var(--ease-out) both;
+}
+
+/* Stagger helper: children with .stagger-item animate in sequence
+   when the parent gains .is-in (set by lib/motion batch helper). */
+.stagger-item {
+  opacity: 0;
+}
+.is-in .stagger-item {
+  animation: rise-in var(--dur-slow) var(--ease-out) both;
+  animation-delay: calc(var(--stagger-i, 0) * 70ms);
+}
+
+/* Hero copy beat — opacity + transform only. Removed filter:blur
+   transition (expensive compositor work on Intel HD 4400). */
+.hero-copy-beat {
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-rise,
+  .motion-fade,
+  .hero-copy-beat,
+  .is-in .stagger-item {
+    animation: none;
+    transition: none;
+  }
+  .stagger-item {
+    opacity: 1;
+  }
+}

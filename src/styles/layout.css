@@ -1,0 +1,90 @@
+/* Container + grid + section rhythm.
+   Different content gets different measure — never one max-width
+   for the whole site. Hero uses full bleed (no container at all). */
+
+.wrap-bleed {
+  width: 100%;
+}
+
+.wrap-cinematic {
+  width: 100%;
+  max-width: 100rem; /* 1600px — wide film compositions */
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.wrap-editorial {
+  width: 100%;
+  max-width: 80rem; /* 1280px — menu rows, product stories */
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.wrap-readable {
+  width: 100%;
+  max-width: 44rem; /* long-form copy measure */
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Section vertical rhythm */
+.section {
+  padding-block: var(--sec-y);
+}
+.section-lg {
+  padding-block: var(--sec-y-lg);
+}
+
+/* 12-col desktop grid, single column below lg */
+.grid-12 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 64rem) {
+  .grid-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* Asymmetric editorial split: 7/5 on desktop, stacked on mobile */
+.editorial-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 64rem) {
+  .editorial-split {
+    grid-template-columns: 7fr 5fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  :root {
+    --sec-y: 4.5rem;
+    --sec-y-lg: 6rem;
+  }
+}
+
+/* ——— Hero scroll scaffolding (Stage 3: single viewport; Stage 4 extends
+   .hero-scroll height to create the pinned scrub distance) ——— */
+.hero-scroll {
+  position: relative;
+}
+.hero-viewport {
+  /* Sticky viewport the future frame canvas fills edge-to-edge. */
+  height: 100svh;
+}
+[data-frame-canvas-mount] {
+  /* Stage 4 mounts one <canvas> here: 100vw x 100vh, no card, no border. */
+  position: absolute;
+  inset: 0;
+}
+[data-frame-canvas-mount] canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
