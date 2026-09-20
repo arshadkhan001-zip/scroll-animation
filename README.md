@@ -1,32 +1,63 @@
-# React + TypeScript + Vite
+# STACKED. — Burgers, Built Differently
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A cinematic, scroll-driven marketing + ordering site for **STACKED.**, a 100%-vegetarian burger brand.
+The centerpiece is a 308-frame burger "film" that builds the burger as you scroll — bun, crisp, juicy,
+melted, stacked — rendered on canvas with copy beats synced to scroll progress.
 
-Currently, two official plugins are available:
+Live: **https://arshadkhan001-zip.github.io/scroll-animation/**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Scroll-driven hero film** — 308 WebP frames scrubbed via GSAP ScrollTrigger + Lenis smooth scroll,
+  with progressive loading, an LRU decode cache, cover-fit canvas rendering, and a reduced-motion fallback.
+- **Signature menu** — alternating editorial layout with prices, tags, and add-to-cart.
+- **Product story** — annotated "Signature / 001" feature section (data-driven, add more with one object).
+- **Order section** — tabbed menu (burgers / sides / drinks / combos / desserts) with quantity steppers.
+- **Cart drawer** — global cart store, subtotals, slide-over drawer.
+- **Combo spotlight, brand story, locations, footer** — full landing-page composition.
+- **Motion system** — one-shot scroll reveals throughout; accessible (skip link, ARIA, focus states).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the Oxlint configuration
+React 19 · TypeScript · Vite · Tailwind CSS v4 · GSAP (ScrollTrigger) · Lenis · lucide-react
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Getting started
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev      # local dev server
+npm run build    # typecheck + production build (outputs dist/)
+npm run preview  # preview the production build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Frame pipeline
+
+The hero film ships as generated WebP copies in `public/frames/` (tracked in git).
+The original PNG sources live in `frames/` (git-ignored, ~350 MB) and are never modified:
+
+```bash
+python scripts/convert-frames.py              # PNG -> public/frames/*.webp (q70)
+python scripts/convert-frames.py --check-only # verify sources only
+```
+
+Frame loading/rendering logic: `src/lib/frames.ts`. Scroll + animation setup: `src/lib/scroll.ts`.
+
+## Project structure
+
+```
+src/
+  components/   # Hero, Navbar, SignatureMenu, ProductStory, OrderSection,
+                # Combo, BrandStory, Locations, Footer, CartDrawer, ...
+  data/         # menu.ts (products), stories.ts (feature stories)
+  lib/          # frames.ts (film engine), scroll.ts (GSAP+Lenis), motion.ts
+  store/        # cart.tsx (global cart)
+  styles/       # design tokens, base, typography, layout, components, motion
+public/frames/  # 308 runtime WebP frames
+scripts/        # convert-frames.py
+```
+
+## Deployment
+
+Pushes to `main` auto-deploy via GitHub Actions (`.github/workflows/deploy.yml`) to GitHub Pages.
+`vite.config.ts` sets `base: '/scroll-animation/'` and all frame URLs resolve through
+`import.meta.env.BASE_URL`, so the site works under the `/scroll-animation/` project subpath.
