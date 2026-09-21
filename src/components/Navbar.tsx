@@ -13,7 +13,7 @@ const MOBILE_LINKS = [
   { href: "#menu", label: "Menu" },
   { href: "#story", label: "About" },
   { href: "#locations", label: "Locations" },
-  { href: "#order", label: "Cart" },
+  { href: "#order", label: "Order" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -120,7 +120,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="hidden items-center gap-2 px-3 py-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-fog transition-colors hover:text-bone sm:inline-flex"
+              className="inline-flex min-h-[44px] items-center gap-2 px-3 py-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-fog transition-colors hover:text-bone"
               aria-label="Search menu"
             >
               <Search size={15} aria-hidden />

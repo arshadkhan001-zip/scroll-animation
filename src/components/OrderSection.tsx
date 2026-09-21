@@ -51,7 +51,7 @@ export default function OrderSection() {
               key={p.id}
               className="group flex items-center justify-between gap-5 border-b hairline py-6"
             >
-              <div className="flex items-baseline gap-4">
+              <div className="flex min-w-0 flex-1 items-baseline gap-4">
                 {p.tag && (
                   <span className="hidden font-mono text-[10px] tracking-[0.18em] text-ember-soft sm:inline">
                     {p.tag}
